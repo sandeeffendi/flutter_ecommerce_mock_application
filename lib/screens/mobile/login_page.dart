@@ -3,7 +3,7 @@ import 'package:my_submission_app/components/my_textfield.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyLoginPage extends StatefulWidget {
-  MyLoginPage({super.key});
+  const MyLoginPage({super.key});
 
   @override
   State<MyLoginPage> createState() => _MyLoginPageState();

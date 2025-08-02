@@ -60,7 +60,7 @@ class _RegisterPageState extends State<MyRegisterPage> {
     }
   }
 
-  // TODO :
+  // TODO
   // Email, Password, Confirm Password Shared Preferences
 
   @override
