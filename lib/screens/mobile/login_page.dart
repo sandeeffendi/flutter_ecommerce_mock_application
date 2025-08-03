@@ -26,6 +26,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
       return;
     }
     if (prefs.getString('userEmail') != _emailController.text) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Email is not registered'),
@@ -35,6 +36,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
       return;
     }
     if (prefs.getString('userPassword') != _passwordController.text) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Password is invalid'),
@@ -46,6 +48,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
 
     // TODO
     // Login Succes Navigate to HomePage
+    if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Login succesfull'),
