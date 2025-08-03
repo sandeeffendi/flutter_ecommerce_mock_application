@@ -14,34 +14,24 @@ class MyTextFormField extends StatelessWidget {
     required this.controller,
   });
 
-
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: TextFormField(
-        decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Theme.of(context).colorScheme.secondary,
-            ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Theme.of(context).colorScheme.primary,
-            ),
-          ),
-          fillColor: Theme.of(context).colorScheme.surface,
-          filled: true,
-          hintText: hintText,
-          hintStyle: Theme.of(
-            context,
-          ).textTheme.labelLarge?.copyWith(color: Colors.grey.shade500),
+    return TextFormField(
+      decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(borderSide: BorderSide.none),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),
         ),
-        obscureText: obscure,
-        controller: controller,
-        validator: validator,
+        fillColor: Theme.of(context).colorScheme.tertiary,
+        filled: true,
+        hintText: hintText,
+        hintStyle: Theme.of(
+          context,
+        ).textTheme.labelLarge?.copyWith(color: Colors.grey.shade500),
       ),
+      obscureText: obscure,
+      controller: controller,
+      validator: validator,
     );
   }
 }
