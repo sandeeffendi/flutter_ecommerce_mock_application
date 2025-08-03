@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_submission_app/components/my_text_form_field.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MyRegisterPage extends StatefulWidget {
   const MyRegisterPage({super.key});
@@ -87,86 +88,127 @@ class _RegisterPageState extends State<MyRegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Logo
-                  Center(child: Icon(Icons.message, size: 150)),
+      resizeToAvoidBottomInset: true,
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final isKeyboardView = MediaQuery.of(context).viewInsets.bottom > 0;
 
-                  SizedBox(height: 8),
+          final screenHeight = MediaQuery.of(context).size.height;
+          final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+          final availableHeight = screenHeight - keyboardHeight;
 
-                  // Create An Account Text
-                  Text(
-                    'Create An Account',
-                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
-                  ),
+          final topHeight = availableHeight * 4 / 7;
+          final bottomHeight = availableHeight * 3 / 7;
 
-                  SizedBox(height: 8),
-
-                  // Email Input
-                  MyTextFormField(
-                    hintText: "Email",
-                    controller: _emailController,
-                    validator: _validateEmail,
-                  ),
-
-                  SizedBox(height: 8),
-
-                  // Password Input
-                  MyTextFormField(
-                    hintText: "password",
-                    controller: _passwordController,
-                    obscure: true,
-                    validator: _validatePassword,
-                  ),
-
-                  SizedBox(height: 8),
-
-                  // Confirm Password Input
-                  MyTextFormField(
-                    hintText: "Confirm Password",
-                    controller: _confirmPasswordController,
-                    obscure: true,
-                    validator: _validateConfirmPassword,
-                  ),
-
-                  SizedBox(height: 15),
-
-                  // Create An Account Button
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 20),
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: _submitForm,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).colorScheme.primary,
-                        foregroundColor: Theme.of(
-                          context,
-                        ).colorScheme.secondary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+          return SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  color: Theme.of(context).colorScheme.primary,
+                  width: double.infinity,
+                  height: topHeight,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 37, right: 37, top: 155),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: isKeyboardView ? 50 : 260,
+                          child: Image.asset(
+                            'assets/images/welcome_screen_basket.png',
+                          ),
                         ),
-                      ),
-
-                      child: Text(
-                        'Create An Account',
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
+                        SizedBox(height: 8),
+                        Image.asset(
+                          'assets/images/welcome_screen_basket_shadow.png',
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+
+                // Form Display Container
+                SizedBox(
+                  height: bottomHeight,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      top: 8,
+                      bottom: 8,
+                      left: 24,
+                      right: 24,
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Create An Account',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+
+                        // Create An Account Form
+                        SizedBox(height: 8),
+                        Form(
+                          key: _formKey,
+                          child: Column(
+                            children: [
+                              //Email Input
+                              MyTextFormField(
+                                hintText: 'Email',
+                                validator: _validateEmail,
+                                controller: _emailController,
+                              ),
+
+                              SizedBox(height: 8),
+
+                              // Password Input
+                              MyTextFormField(
+                                hintText: 'Password',
+                                validator: _validatePassword,
+                                controller: _passwordController,
+                                obscure: true,
+                              ),
+
+                              SizedBox(height: 8),
+                              MyTextFormField(
+                                hintText: 'Confirm Password',
+                                validator: _validateConfirmPassword,
+                                controller: _confirmPasswordController,
+                                obscure: true,
+                              ),
+
+                              SizedBox(height: 8),
+
+                              // Create An Account Button
+                              SizedBox(
+                                width: double.infinity,
+                                height: 56,
+                                child: RawMaterialButton(
+                                  onPressed: _submitForm,
+                                  fillColor: Theme.of(
+                                    context,
+                                  ).colorScheme.primary,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Text(
+                                    'Crate An Account',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelLarge
+                                        ?.copyWith(color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
