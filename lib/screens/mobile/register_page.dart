@@ -11,7 +11,6 @@ class MyRegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<MyRegisterPage> {
   final _formKey = GlobalKey<FormState>();
-  bool isValidate = false;
 
   // Email, Password, Confirm Password Controller Instances
   final TextEditingController _emailController = TextEditingController();
@@ -22,28 +21,22 @@ class _RegisterPageState extends State<MyRegisterPage> {
   // Email Validator
   String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
-      isValidate = false;
       return 'Please input your email';
     }
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
     if (!emailRegex.hasMatch(value)) {
-      isValidate = false;
       return 'Email is invalid, please input correct email address';
     }
-    isValidate = true;
     return null;
   }
 
   // Password Validator
   String? _validatePassword(String? value) {
     if (value == null || value.isEmpty) {
-      isValidate = false;
       return 'Please input your password';
     } else if (value.length < 6) {
-      isValidate = false;
       return 'Password length must be 6 character or more';
     } else {
-      isValidate = true;
       return null;
     }
   }
@@ -51,17 +44,15 @@ class _RegisterPageState extends State<MyRegisterPage> {
   // Confirm Password Validator
   String? _validateConfirmPassword(String? value) {
     if (value == null || value.isEmpty) {
-      isValidate = false;
       return '\'Confirm Password\' cannot be empty';
     } else if (_passwordController.text != _confirmPasswordController.text) {
-      isValidate = false;
       return 'Password not match';
     } else {
-      isValidate = true;
       return null;
     }
   }
 
+  // FORM HANDLER
   // Email, Password, Confirm Password Form Handler
   Future<void> _submitForm() async {
     if (_formKey.currentState!.validate()) {
@@ -76,6 +67,10 @@ class _RegisterPageState extends State<MyRegisterPage> {
         '${prefs.getString('userEmail')}${prefs.getString('userPassword')}',
       );
     }
+
+    //TODO
+    // Create Account Success
+    // Navifate to Success
     return;
   }
 
@@ -95,7 +90,7 @@ class _RegisterPageState extends State<MyRegisterPage> {
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            padding: EdgeInsets.only(left: 16, right: 16),
+            padding: EdgeInsets.symmetric(horizontal: 16),
             child: Form(
               key: _formKey,
               child: Column(
