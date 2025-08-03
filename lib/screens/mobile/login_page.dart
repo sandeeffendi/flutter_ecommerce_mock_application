@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_submission_app/components/my_text_form_field.dart';
@@ -90,8 +92,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
     super.dispose();
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget MyBuild(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(backgroundColor: Colors.transparent),
@@ -200,6 +201,119 @@ class _MyLoginPageState extends State<MyLoginPage> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          // Image Display Container
+          Expanded(
+            flex: 4,
+            child: Container(
+              padding: EdgeInsets.only(left: 37, right: 37, top: 155),
+              color: Theme.of(context).colorScheme.primary,
+              width: double.infinity,
+              child: Column(
+                children: [
+                  Image.asset('assets/images/welcome_screen_basket.png'),
+                  SizedBox(height: 8),
+                  Image.asset('assets/images/welcome_screen_basket_shadow.png'),
+                ],
+              ),
+            ),
+          ),
+
+          // Form Display Container
+          Expanded(
+            flex: 3,
+            child: Container(
+              padding: EdgeInsets.only(top: 8, bottom: 8, left: 24, right: 24),
+              child: Column(
+                children: [
+                  Text(
+                    'Login To Explore More',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+
+                  // Login Form
+                  SizedBox(height: 8),
+                  Form(
+                    child: Column(
+                      children: [
+                        //Email Input
+                        MyTextFormField(
+                          hintText: 'Email',
+                          controller: _emailController,
+                        ),
+
+                        SizedBox(height: 8),
+
+                        // Password Input
+                        MyTextFormField(
+                          hintText: 'Password',
+                          controller: _emailController,
+                        ),
+
+                        SizedBox(height: 8),
+
+                        // Login Button
+                        SizedBox(
+                          width: double.infinity,
+                          height: 56,
+                          child: RawMaterialButton(
+                            onPressed: () {},
+                            fillColor: Theme.of(context).colorScheme.primary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Text(
+                              'Login',
+                              style: Theme.of(context).textTheme.labelLarge
+                                  ?.copyWith(color: Colors.white),
+                            ),
+                          ),
+                        ),
+
+                        // Dont have an account? Create an Account
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'Don\'t have an account?',
+                              style: GoogleFonts.montserrat(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'Create an account.',
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: const Color.fromARGB(255, 73, 32, 255),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
