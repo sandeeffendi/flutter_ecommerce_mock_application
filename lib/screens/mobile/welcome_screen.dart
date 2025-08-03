@@ -44,6 +44,8 @@ class WelcomeScreen extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+
+                      // Form Description
                       Text(
                         'Get The Freshest Fruit Salad Combo',
                         style: Theme.of(context).textTheme.labelLarge,
@@ -59,6 +61,8 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+
+                  // Continue Button
                   SizedBox(
                     width: double.infinity,
                     height: 56,
