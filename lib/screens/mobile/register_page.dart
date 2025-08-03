@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_submission_app/components/my_text_form_field.dart';
+import 'package:my_submission_app/screens/mobile/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -100,113 +102,155 @@ class _RegisterPageState extends State<MyRegisterPage> {
           final topHeight = availableHeight * 4 / 7;
           final bottomHeight = availableHeight * 3 / 7;
 
-          return SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  color: Theme.of(context).colorScheme.primary,
-                  width: double.infinity,
-                  height: topHeight,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 37, right: 37, top: 155),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: isKeyboardView ? 50 : 260,
-                          child: Image.asset(
-                            'assets/images/welcome_screen_basket.png',
-                          ),
+          return Stack(
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      color: Theme.of(context).colorScheme.primary,
+                      width: double.infinity,
+                      height: topHeight,
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 37, right: 37, top: 155),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: isKeyboardView ? 50 : 260,
+                              child: Image.asset(
+                                'assets/images/register_screen_basket.png',
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            Image.asset(
+                              'assets/images/register_screen_basket_shadow.png',
+                            ),
+                          ],
                         ),
-                        SizedBox(height: 8),
-                        Image.asset(
-                          'assets/images/welcome_screen_basket_shadow.png',
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
 
-                // Form Display Container
-                SizedBox(
-                  height: bottomHeight,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      top: 8,
-                      bottom: 8,
-                      left: 24,
-                      right: 24,
-                    ),
-                    child: Column(
-                      children: [
-                        Text(
-                          'Create An Account',
-                          style: Theme.of(context).textTheme.bodyLarge,
+                    // Form Display Container
+                    SizedBox(
+                      height: bottomHeight,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          top: 8,
+                          bottom: 8,
+                          left: 24,
+                          right: 24,
                         ),
+                        child: Column(
+                          children: [
+                            Text(
+                              'Create An Account',
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
 
-                        // Create An Account Form
-                        SizedBox(height: 8),
-                        Form(
-                          key: _formKey,
-                          child: Column(
-                            children: [
-                              //Email Input
-                              MyTextFormField(
-                                hintText: 'Email',
-                                validator: _validateEmail,
-                                controller: _emailController,
-                              ),
-
-                              SizedBox(height: 8),
-
-                              // Password Input
-                              MyTextFormField(
-                                hintText: 'Password',
-                                validator: _validatePassword,
-                                controller: _passwordController,
-                                obscure: true,
-                              ),
-
-                              SizedBox(height: 8),
-                              MyTextFormField(
-                                hintText: 'Confirm Password',
-                                validator: _validateConfirmPassword,
-                                controller: _confirmPasswordController,
-                                obscure: true,
-                              ),
-
-                              SizedBox(height: 8),
-
-                              // Create An Account Button
-                              SizedBox(
-                                width: double.infinity,
-                                height: 56,
-                                child: RawMaterialButton(
-                                  onPressed: _submitForm,
-                                  fillColor: Theme.of(
-                                    context,
-                                  ).colorScheme.primary,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5),
+                            // Create An Account Form
+                            SizedBox(height: 8),
+                            Form(
+                              key: _formKey,
+                              child: Column(
+                                children: [
+                                  //Email Input
+                                  MyTextFormField(
+                                    hintText: 'Email',
+                                    validator: _validateEmail,
+                                    controller: _emailController,
                                   ),
-                                  child: Text(
-                                    'Crate An Account',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .labelLarge
-                                        ?.copyWith(color: Colors.white),
+
+                                  SizedBox(height: 8),
+
+                                  // Password Input
+                                  MyTextFormField(
+                                    hintText: 'Password',
+                                    validator: _validatePassword,
+                                    controller: _passwordController,
+                                    obscure: true,
                                   ),
-                                ),
+
+                                  SizedBox(height: 8),
+                                  MyTextFormField(
+                                    hintText: 'Confirm Password',
+                                    validator: _validateConfirmPassword,
+                                    controller: _confirmPasswordController,
+                                    obscure: true,
+                                  ),
+
+                                  SizedBox(height: 8),
+
+                                  // Create An Account Button
+                                  SizedBox(
+                                    width: double.infinity,
+                                    height: 56,
+                                    child: RawMaterialButton(
+                                      onPressed: _submitForm,
+                                      fillColor: Theme.of(
+                                        context,
+                                      ).colorScheme.primary,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: Text(
+                                        'Crate An Account',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge
+                                            ?.copyWith(color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              Positioned(
+                top: 55,
+                left: 10,
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 40,
+                      child: RawMaterialButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MyLoginPage(),
+                            ),
+                          );
+                        },
+                        fillColor: Color.fromRGBO(165, 165, 165, 0.434),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Icon(
+                          CupertinoIcons.back,
+                          color: Theme.of(context).colorScheme.tertiary,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 8),
+                    Text(
+                      'Back To Login',
+                      style: GoogleFonts.montserrat(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           );
         },
       ),

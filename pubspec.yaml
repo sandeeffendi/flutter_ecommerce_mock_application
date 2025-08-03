@@ -36,6 +36,8 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   shared_preferences: ^2.5.3
+  flutter_native_splash: ^2.4.6
+
 
 dev_dependencies:
   flutter_test:
@@ -61,7 +63,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/welcome_screen_basket.png
+    - assets/images/register_screen_basket.png
     - assets/images/welcome_screen_basket_shadow.png
+    - assets/images/register_screen_basket_shadow.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -88,3 +92,10 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+flutter_native_splash:
+  color: "#FFFFFF" # latar belakang splash
+  image: assets/images/fresh_hub_logo.png # gambar logo
+  android: true
+  ios: true
+  fullscreen: true
