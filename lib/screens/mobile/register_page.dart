@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_submission_app/components/my_text_form_field.dart';
-import 'package:my_submission_app/screens/mobile/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -67,7 +66,7 @@ class _RegisterPageState extends State<MyRegisterPage> {
       await prefs.setString('userPassword', password);
 
       debugPrint(
-        '${prefs.getString('userEmail')}${prefs.getString('userPassword')}',
+        'Berhasil. Email: ${prefs.getString('userEmail')}, Password: ${prefs.getString('userPassword')}',
       );
     }
 
