@@ -221,12 +221,7 @@ class _RegisterPageState extends State<MyRegisterPage> {
                       width: 40,
                       child: RawMaterialButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => MyLoginPage(),
-                            ),
-                          );
+                          Navigator.pop(context);
                         },
                         fillColor: Color.fromRGBO(165, 165, 165, 0.434),
                         shape: RoundedRectangleBorder(

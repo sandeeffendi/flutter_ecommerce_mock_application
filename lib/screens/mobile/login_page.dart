@@ -47,7 +47,6 @@ class _MyLoginPageState extends State<MyLoginPage> {
       return;
     }
 
-    // TODO
     // Login Succes Navigate to HomePage
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
@@ -214,7 +213,15 @@ class _MyLoginPageState extends State<MyLoginPage> {
                                     ),
                                   ),
                                   TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              MyRegisterPage(),
+                                        ),
+                                      );
+                                    },
                                     child: Text(
                                       'Create an account.',
                                       style: GoogleFonts.montserrat(
