@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:my_submission_app/components/my_text_form_field.dart';
 import 'package:my_submission_app/screens/mobile/register_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,7 +34,6 @@ class _MyLoginPageState extends State<MyLoginPage> {
           duration: Duration(seconds: 1),
           backgroundColor: Colors.red,
         ),
-        
       );
       return;
     }
@@ -45,10 +45,12 @@ class _MyLoginPageState extends State<MyLoginPage> {
           duration: Duration(seconds: 1),
         ),
       );
+
       return;
     }
 
-    // Login Succes Navigate to HomePage
+    // TODO: Login Succes Navigate to HomePage
+    // TODO: set state log in = true
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -93,8 +95,8 @@ class _MyLoginPageState extends State<MyLoginPage> {
   }
 
   @override
-  @override
   Widget build(BuildContext context) {
+    // TODO: Create animation transition between pages
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       resizeToAvoidBottomInset: true,
@@ -118,12 +120,15 @@ class _MyLoginPageState extends State<MyLoginPage> {
                 ),
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).viewInsets.bottom > 0
-                          ? 150
-                          : 200,
-                      child: Image.asset(
-                        'assets/images/welcome_screen_basket.png',
+                    Hero(
+                      tag: 'LoginRegisterIcon',
+                      child: SizedBox(
+                        height: MediaQuery.of(context).viewInsets.bottom > 0
+                            ? 150
+                            : 200,
+                        child: Image.asset(
+                          'assets/images/welcome_screen_basket.png',
+                        ),
                       ),
                     ),
                     const SizedBox(height: 8),
