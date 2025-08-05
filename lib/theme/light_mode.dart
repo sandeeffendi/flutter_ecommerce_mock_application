@@ -17,4 +17,9 @@ ThemeData lightmode = ThemeData(
     inversePrimary: Color(0xFFE0E0E0),
   ),
   textTheme: myTextTheme,
+
+  snackBarTheme: SnackBarThemeData(
+    backgroundColor: Colors.grey[900], // default background
+    contentTextStyle: TextStyle(color: Colors.white),
+  ),
 );

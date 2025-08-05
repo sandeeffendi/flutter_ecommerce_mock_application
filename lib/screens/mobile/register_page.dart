@@ -65,9 +65,15 @@ class _RegisterPageState extends State<MyRegisterPage> {
       await prefs.setString('userEmail', email);
       await prefs.setString('userPassword', password);
 
-      debugPrint(
-        'Berhasil. Email: ${prefs.getString('userEmail')}, Password: ${prefs.getString('userPassword')}',
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Account Created. Redirect to Login Page.'),
+          backgroundColor: Colors.green,
+        ),
       );
+
+      Navigator.pop(context);
     }
 
     //TODO
@@ -87,166 +93,162 @@ class _RegisterPageState extends State<MyRegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isKeyboardView = MediaQuery.of(context).viewInsets.bottom > 0;
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       resizeToAvoidBottomInset: true,
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          final isKeyboardView = MediaQuery.of(context).viewInsets.bottom > 0;
-
-          final screenHeight = MediaQuery.of(context).size.height;
-          final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
-          final availableHeight = screenHeight - keyboardHeight;
-
-          final topHeight = availableHeight * 4 / 7;
-          final bottomHeight = availableHeight * 3 / 7;
-
-          return Stack(
-            children: [
-              SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      color: Theme.of(context).colorScheme.primary,
-                      width: double.infinity,
-                      height: topHeight,
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 37, right: 37, top: 155),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: isKeyboardView ? 50 : 260,
-                              child: Image.asset(
-                                'assets/images/register_screen_basket.png',
-                              ),
-                            ),
-                            SizedBox(height: 8),
-                            Image.asset(
-                              'assets/images/register_screen_basket_shadow.png',
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-
-                    // Form Display Container
-                    SizedBox(
-                      height: bottomHeight,
-                      child: Padding(
-                        padding: EdgeInsets.only(
-                          top: 8,
-                          bottom: 8,
-                          left: 24,
-                          right: 24,
-                        ),
-                        child: Column(
-                          children: [
-                            Text(
-                              'Create An Account',
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
-
-                            // Create An Account Form
-                            SizedBox(height: 8),
-                            Form(
-                              key: _formKey,
-                              child: Column(
-                                children: [
-                                  //Email Input
-                                  MyTextFormField(
-                                    hintText: 'Email',
-                                    validator: _validateEmail,
-                                    controller: _emailController,
-                                  ),
-
-                                  SizedBox(height: 8),
-
-                                  // Password Input
-                                  MyTextFormField(
-                                    hintText: 'Password',
-                                    validator: _validatePassword,
-                                    controller: _passwordController,
-                                    obscure: true,
-                                  ),
-
-                                  SizedBox(height: 8),
-                                  MyTextFormField(
-                                    hintText: 'Confirm Password',
-                                    validator: _validateConfirmPassword,
-                                    controller: _confirmPasswordController,
-                                    obscure: true,
-                                  ),
-
-                                  SizedBox(height: 8),
-
-                                  // Create An Account Button
-                                  SizedBox(
-                                    width: double.infinity,
-                                    height: 56,
-                                    child: RawMaterialButton(
-                                      onPressed: _submitForm,
-                                      fillColor: Theme.of(
-                                        context,
-                                      ).colorScheme.primary,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                      child: Text(
-                                        'Crate An Account',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelLarge
-                                            ?.copyWith(color: Colors.white),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+      body: SafeArea(
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom,
               ),
-              Positioned(
-                top: 55,
-                left: 10,
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 40,
-                      child: RawMaterialButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        fillColor: Color.fromRGBO(165, 165, 165, 0.434),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: Icon(
-                          CupertinoIcons.back,
-                          color: Theme.of(context).colorScheme.tertiary,
-                        ),
-                      ),
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // Top Banner Container
+                  Container(
+                    color: Theme.of(context).colorScheme.primary,
+                    padding: const EdgeInsets.only(
+                      left: 37,
+                      right: 37,
+                      top: 80,
+                      bottom: 20,
                     ),
-                    SizedBox(width: 8),
-                    Text(
-                      'Back To Login',
-                      style: GoogleFonts.montserrat(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: isKeyboardView ? 100 : 200,
+                          child: Image.asset(
+                            'assets/images/register_screen_basket.png',
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        SizedBox(
+                          width: isKeyboardView ? 150 : 250,
+                          child: Image.asset(
+                            'assets/images/register_screen_basket_shadow.png',
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+
+                  // Form Container
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 16,
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Create An Account',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        const SizedBox(height: 8),
+
+                        Form(
+                          key: _formKey,
+                          child: Column(
+                            children: [
+                              // Email Input
+                              MyTextFormField(
+                                hintText: 'Email',
+                                validator: _validateEmail,
+                                controller: _emailController,
+                              ),
+                              const SizedBox(height: 8),
+
+                              // Password Input
+                              MyTextFormField(
+                                hintText: 'Password',
+                                validator: _validatePassword,
+                                controller: _passwordController,
+                                obscure: true,
+                              ),
+                              const SizedBox(height: 8),
+
+                              // Confirm Password
+                              MyTextFormField(
+                                hintText: 'Confirm Password',
+                                validator: _validateConfirmPassword,
+                                controller: _confirmPasswordController,
+                                obscure: true,
+                              ),
+                              const SizedBox(height: 8),
+
+                              // Submit Button
+                              SizedBox(
+                                width: double.infinity,
+                                height: 56,
+                                child: RawMaterialButton(
+                                  onPressed: _submitForm,
+                                  fillColor: Theme.of(
+                                    context,
+                                  ).colorScheme.primary,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Text(
+                                    'Create An Account',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelLarge
+                                        ?.copyWith(color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-            ],
-          );
-        },
+            ),
+
+            // Positioned Back Button
+            Positioned(
+              top: 21,
+              left: 10,
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 40,
+                    height: 40,
+                    child: RawMaterialButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      fillColor: Color.fromRGBO(165, 165, 165, 0.434),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Icon(
+                        CupertinoIcons.back,
+                        color: Theme.of(context).colorScheme.tertiary,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    'Back To Login',
+                    style: GoogleFonts.montserrat(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
