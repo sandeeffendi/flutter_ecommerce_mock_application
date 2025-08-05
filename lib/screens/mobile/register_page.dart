@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_submission_app/components/my_text_form_field.dart';
+import 'package:my_submission_app/screens/mobile/register_succes_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -68,17 +69,19 @@ class _RegisterPageState extends State<MyRegisterPage> {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Account Created. Redirect to Login Page.'),
+          content: Text('Account Created. Login to explore more.'),
           backgroundColor: Colors.green,
         ),
       );
 
-      Navigator.pop(context);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => RegisterSuccesScreen()),
+      );
     }
 
-    //TODO
-    // Create Account Success
-    // Navifate to Success
+    //TODO: Create Account Success page
+    // TODO: Navigate to Account Success page
     return;
   }
 
@@ -95,6 +98,7 @@ class _RegisterPageState extends State<MyRegisterPage> {
   Widget build(BuildContext context) {
     final isKeyboardView = MediaQuery.of(context).viewInsets.bottom > 0;
 
+    //TODO: Create a simple animation transition between Pages
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       resizeToAvoidBottomInset: true,
@@ -120,10 +124,13 @@ class _RegisterPageState extends State<MyRegisterPage> {
                     ),
                     child: Column(
                       children: [
-                        SizedBox(
-                          height: isKeyboardView ? 100 : 200,
-                          child: Image.asset(
-                            'assets/images/register_screen_basket.png',
+                        Hero(
+                          tag: 'LoginRegisterIcon',
+                          child: SizedBox(
+                            height: isKeyboardView ? 100 : 200,
+                            child: Image.asset(
+                              'assets/images/register_screen_basket.png',
+                            ),
                           ),
                         ),
                         const SizedBox(height: 8),
