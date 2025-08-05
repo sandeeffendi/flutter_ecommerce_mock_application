@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   shared_preferences: ^2.5.3
   flutter_native_splash: ^2.4.6
+  lottie: ^3.3.1
 
 
 dev_dependencies:
@@ -66,6 +67,7 @@ flutter:
     - assets/images/register_screen_basket.png
     - assets/images/welcome_screen_basket_shadow.png
     - assets/images/register_screen_basket_shadow.png
+    - assets/animation/success.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_submission_app/screens/mobile/login_page.dart';
+import 'package:my_submission_app/screens/mobile/register_succes_screen.dart';
+import 'package:my_submission_app/screens/mobile/welcome_screen.dart';
 import 'package:my_submission_app/theme/light_mode.dart';
 
 void main() {
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: lightmode,
 
-      home: MyLoginPage(),
+      home: RegisterSuccesScreen(),
     );
   }
 }
