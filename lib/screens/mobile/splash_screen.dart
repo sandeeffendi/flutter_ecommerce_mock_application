@@ -1,41 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:my_submission_app/screens/mobile/pages/home_page.dart';
+import 'package:my_submission_app/screens/mobile/login_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
+class MySplashScreen extends StatefulWidget {
+  const MySplashScreen({super.key});
+
+  @override
+  State<MySplashScreen> createState() => MySplashScreenState();
+}
+
+class MySplashScreenState extends State<MySplashScreen> {
+  //init state
+  @override
+  @override
+  void initState() {
+    super.initState();
+    checkIsLoggedIn();
+  }
+
+  //check if user is logged in
+  Future<void> checkIsLoggedIn() async {
+    final prefs = await SharedPreferences.getInstance();
+    final bool isLoggedIn = prefs.getBool('is_logged_in') ?? false;
+
+    if (isLoggedIn) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+    }
+    if (!isLoggedIn) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => MyLoginPage()),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset('assets/images/fresh_hub_logo.png'),
-            SizedBox(height: 10),
-            Container(
-              width: 200,
-              height: 50,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                ),
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              child: Center(
-                child: Text(
-                  'Fresh Hub',
-                  style: GoogleFonts.montserrat(
-                    fontSize: 25,
-                    color: Theme.of(context).colorScheme.surface,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+    return const CircularProgressIndicator();
   }
 }

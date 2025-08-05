@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_submission_app/components/my_text_form_field.dart';
+import 'package:my_submission_app/screens/mobile/pages/home_page.dart';
 import 'package:my_submission_app/screens/mobile/register_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -58,7 +59,10 @@ class _MyLoginPageState extends State<MyLoginPage> {
         backgroundColor: Colors.green,
       ),
     );
-    return;
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => HomePage()),
+    );
   }
 
   // Email Password Validator
@@ -95,7 +99,6 @@ class _MyLoginPageState extends State<MyLoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Create animation transition between pages
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       resizeToAvoidBottomInset: true,

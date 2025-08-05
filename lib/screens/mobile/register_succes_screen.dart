@@ -4,7 +4,9 @@ import 'package:lottie/lottie.dart';
 import 'package:my_submission_app/screens/mobile/login_page.dart';
 
 class RegisterSuccesScreen extends StatefulWidget {
-  const RegisterSuccesScreen({super.key});
+  final String? username;
+
+  const RegisterSuccesScreen({super.key, required this.username});
 
   @override
   State<RegisterSuccesScreen> createState() => _RegisterSuccesState();
@@ -20,6 +22,8 @@ class _RegisterSuccesState extends State<RegisterSuccesScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+
+              // Success Animation
               SizedBox(
                 height: 300,
                 child: Lottie.asset(
@@ -27,6 +31,8 @@ class _RegisterSuccesState extends State<RegisterSuccesScreen> {
                   repeat: false,
                 ),
               ),
+
+              // Headline Created account
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 35),
                 child: Column(
@@ -38,6 +44,13 @@ class _RegisterSuccesState extends State<RegisterSuccesScreen> {
                             color: Theme.of(context).colorScheme.secondary,
                           ),
                     ),
+                    Text(
+                      'Welcome ${widget.username}',
+                      style: Theme.of(context).textTheme.headlineLarge,
+                      textAlign: TextAlign.center,
+                    ),
+                    
+                    // Back to Login page button
                     Container(
                       margin: EdgeInsets.only(top: 10),
                       padding: EdgeInsets.symmetric(horizontal: 40),

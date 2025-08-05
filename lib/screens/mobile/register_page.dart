@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_submission_app/components/my_text_form_field.dart';
 import 'package:my_submission_app/screens/mobile/register_succes_screen.dart';
+import 'package:my_submission_app/services/shared_prefs_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,6 +15,7 @@ class MyRegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<MyRegisterPage> {
   final _formKey = GlobalKey<FormState>();
+  String? username = '';
 
   // Email, Password, Confirm Password Controller Instances
   final TextEditingController _emailController = TextEditingController();
@@ -59,6 +61,7 @@ class _RegisterPageState extends State<MyRegisterPage> {
   // Email, Password, Confirm Password Form Handler
   Future<void> _submitForm() async {
     if (_formKey.currentState!.validate()) {
+      final prefsServices = SharedPrefsServices();
       final prefs = await SharedPreferences.getInstance();
       final String email = _emailController.text;
       final String password = _passwordController.text;
@@ -74,15 +77,32 @@ class _RegisterPageState extends State<MyRegisterPage> {
         ),
       );
 
+      loadUsername();
+      prefsServices.saveLoginStatus();
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => RegisterSuccesScreen()),
+        MaterialPageRoute(
+          builder: (context) {
+            return RegisterSuccesScreen(username: username);
+          },
+        ),
       );
     }
+  }
 
-    //TODO: Create Account Success page
-    // TODO: Navigate to Account Success page
-    return;
+  // init state
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  // Get username
+  Future<void> loadUsername() async {
+    final prefsServices = SharedPrefsServices();
+    final name = await prefsServices.getUsername();
+    setState(() {
+      username = name;
+    });
   }
 
   // Dispose State
@@ -93,6 +113,9 @@ class _RegisterPageState extends State<MyRegisterPage> {
     _confirmPasswordController.dispose();
     super.dispose();
   }
+
+  // TODO: Create Account Success page
+  // TODO: Navigate to Account Success page
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +136,6 @@ class _RegisterPageState extends State<MyRegisterPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-
                   // Top Banner Container
                   Container(
                     color: Theme.of(context).colorScheme.primary,
