@@ -113,6 +113,7 @@ class _RegisterPageState extends State<MyRegisterPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+
                   // Top Banner Container
                   Container(
                     color: Theme.of(context).colorScheme.primary,

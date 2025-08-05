@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:my_submission_app/components/my_text_form_field.dart';
 import 'package:my_submission_app/screens/mobile/register_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
