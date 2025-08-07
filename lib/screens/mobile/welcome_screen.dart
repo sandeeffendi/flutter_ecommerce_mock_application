@@ -4,9 +4,6 @@ import 'package:my_submission_app/screens/mobile/login_page.dart';
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
 
-  // TODO: If Logged in direct to HomePage()
-  // TODO: If not Logged in direct to LoginPage()
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

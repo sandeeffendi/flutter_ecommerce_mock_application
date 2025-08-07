@@ -25,12 +25,14 @@ class MySplashScreenState extends State<MySplashScreen> {
     final bool isLoggedIn = prefs.getBool('is_logged_in') ?? false;
 
     if (isLoggedIn) {
+      if (!mounted) return;
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => HomePage()),
       );
     }
     if (!isLoggedIn) {
+      if (!mounted) return;
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => MyLoginPage()),

@@ -77,6 +77,7 @@ class _RegisterPageState extends State<MyRegisterPage> {
         ),
       );
 
+      removeUsername();
       loadUsername();
       prefsServices.saveLoginStatus();
       Navigator.pushReplacement(
@@ -105,6 +106,12 @@ class _RegisterPageState extends State<MyRegisterPage> {
     });
   }
 
+  // Remove username
+  Future<void> removeUsername() async {
+    final prefsServices = SharedPrefsServices();
+    await prefsServices.removeUsername();
+  }
+
   // Dispose State
   @override
   void dispose() {
@@ -114,14 +121,10 @@ class _RegisterPageState extends State<MyRegisterPage> {
     super.dispose();
   }
 
-  // TODO: Create Account Success page
-  // TODO: Navigate to Account Success page
-
   @override
   Widget build(BuildContext context) {
     final isKeyboardView = MediaQuery.of(context).viewInsets.bottom > 0;
 
-    //TODO: Create a simple animation transition between Pages
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       resizeToAvoidBottomInset: true,

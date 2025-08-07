@@ -7,7 +7,7 @@ ThemeData lightmode = ThemeData(
 
     secondary: Color(0xFF27214D),
 
-    tertiary: Color(0xffF3F1F1),
+    tertiary: Color.fromARGB(255, 220, 203, 169),
 
     surface: Color(0xFFFFFFFF),
 

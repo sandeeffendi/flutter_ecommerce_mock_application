@@ -25,9 +25,9 @@ class MyTextFormField extends StatelessWidget {
         fillColor: Theme.of(context).colorScheme.tertiary,
         filled: true,
         hintText: hintText,
-        hintStyle: Theme.of(
-          context,
-        ).textTheme.labelLarge?.copyWith(color: Colors.grey.shade500),
+        hintStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
+          color: Theme.of(context).colorScheme.surface,
+        ),
       ),
       obscureText: obscure,
       controller: controller,

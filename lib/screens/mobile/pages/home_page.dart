@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_submission_app/components/my_bottom_nav.dart';
+import 'package:my_submission_app/screens/mobile/pages/activity_page.dart';
 import 'package:my_submission_app/screens/mobile/pages/basket_page.dart';
-import 'package:my_submission_app/screens/mobile/pages/setting_page.dart';
+import 'package:my_submission_app/screens/mobile/pages/shop_page.dart';
+import 'package:my_submission_app/screens/mobile/splash_screen.dart';
 import 'package:my_submission_app/services/shared_prefs_services.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,8 +14,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // TODO: Create bottom nav bar index for navigation
   int _selectedIndex = 0;
+
+  // Set Logout Method
+  Future<void> setLogout() async {
+    final prefsService = SharedPrefsServices();
+    prefsService.disposeLoginStatus();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => MySplashScreen()),
+    );
+  }
 
   // Bottom navigation on selected index
   void navigateBottomNavbar(int index) {
@@ -23,14 +34,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   final List<Widget> _pages = [
-    //Home Page
-    // HomePage(),
+    // Shop Page
+    ShopPage(),
 
-    // Basket Pages
+    // Basket Page
     BasketPage(),
 
-    // Settings Pages
-    SettingPage(),
+    // ActivityPage
+    ActivityPage(),
   ];
 
   // Set logout state
@@ -42,11 +53,85 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('HomePage')),
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        leading: Builder(
+          builder: (context) => IconButton(
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+            icon: Icon(Icons.menu),
+            color: Theme.of(context).colorScheme.secondary,
+          ),
+        ),
+      ),
+
+      // Drawer
+      drawer: Drawer(
+        backgroundColor: Theme.of(context).colorScheme.tertiary,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              children: [
+                DrawerHeader(
+                  child: Image.asset('assets/images/welcome_screen_basket.png'),
+                ),
+                Padding(padding: EdgeInsets.all(25), child: Divider()),
+
+                // Pages
+                Padding(
+                  padding: EdgeInsets.all(25),
+                  child: ListTile(
+                    leading: Icon(Icons.person),
+                    title: Text('Profile'),
+                  ),
+                ),
+
+                Padding(
+                  padding: EdgeInsetsGeometry.all(25),
+                  child: ListTile(
+                    leading: Icon(Icons.info),
+                    title: Text(
+                      'About',
+                      style: Theme.of(context).textTheme.labelMedium,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            // Logout Button
+            Container(
+              alignment: Alignment.bottomRight,
+              child: RawMaterialButton(
+                onPressed: setLogout,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'Log Out',
+                        style: Theme.of(context).textTheme.labelMedium,
+                      ),
+                    ),
+                    Icon(Icons.logout),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+
+      // Bottom Nav
       bottomNavigationBar: MyBottomNav(
         onTabChange: (index) => navigateBottomNavbar(index),
       ),
+
+      // Body
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: _pages[_selectedIndex],
     );
   }

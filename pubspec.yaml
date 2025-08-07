@@ -68,6 +68,12 @@ flutter:
     - assets/images/register_screen_basket.png
     - assets/images/welcome_screen_basket_shadow.png
     - assets/images/register_screen_basket_shadow.png
+    - assets/images/fresh_hub_logo.png
+    - assets/images/berry_manggo_combo.png
+    - assets/images/honey_lime_combo.png
+    - assets/images/melon_fruit_combo.png
+    - assets/images/quinoa_fruit_combo.png
+    - assets/images/tropical_fruit_combo.png
     - assets/animation/success.json
 
   # An image asset can refer to one or more resolution-specific "variants", see

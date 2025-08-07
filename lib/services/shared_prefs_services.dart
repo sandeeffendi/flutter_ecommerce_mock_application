@@ -1,5 +1,3 @@
-//TODO: Make an abstraction of Login and Logout handler
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefsServices {
@@ -27,6 +25,12 @@ class SharedPrefsServices {
   Future<String?> getUsername() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString(_keyUsername);
+  }
+
+  // Remove username
+  Future<void> removeUsername() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('username');
   }
 
   // Cek if user logged in

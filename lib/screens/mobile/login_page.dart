@@ -49,8 +49,6 @@ class _MyLoginPageState extends State<MyLoginPage> {
       return;
     }
 
-    // TODO: Login Succes Navigate to HomePage
-    // TODO: set state log in = true
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
