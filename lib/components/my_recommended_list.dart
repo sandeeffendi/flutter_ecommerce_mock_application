@@ -65,11 +65,20 @@ class _MyRecommendedListState extends State<MyRecommendedList> {
                       child: Image.asset(widget.imageAssets),
                     ),
                     SizedBox(height: 10),
-                    Text(widget.name),
+                    Text(
+                      widget.name,
+                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Text(widget.price),
+                        Text(
+                          widget.price,
+                          style: Theme.of(context).textTheme.labelSmall
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                        ),
                         IconButton(onPressed: () {}, icon: Icon(Icons.add)),
                       ],
                     ),
