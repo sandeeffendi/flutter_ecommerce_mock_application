@@ -41,7 +41,6 @@ class _HomePageState extends State<HomePage> {
     BasketPage(),
 
     // ActivityPage
-    ActivityPage(),
   ];
 
   // Set logout state
