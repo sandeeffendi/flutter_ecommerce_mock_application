@@ -101,6 +101,8 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
 
+            // TODO: Create dark mode, light mode toggle
+
             // Logout Button
             Container(
               alignment: Alignment.bottomRight,
