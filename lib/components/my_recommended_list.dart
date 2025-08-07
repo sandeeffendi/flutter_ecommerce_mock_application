@@ -4,12 +4,14 @@ class MyRecommendedList extends StatefulWidget {
   final String name;
   final String price;
   final String imageAssets;
+  final void Function()? onTap;
 
-  const MyRecommendedList({
+  MyRecommendedList({
     super.key,
     required this.name,
     required this.price,
     required this.imageAssets,
+    required this.onTap,
   });
 
   @override
@@ -79,7 +81,10 @@ class _MyRecommendedListState extends State<MyRecommendedList> {
                           style: Theme.of(context).textTheme.labelSmall
                               ?.copyWith(fontWeight: FontWeight.bold),
                         ),
-                        IconButton(onPressed: () {}, icon: Icon(Icons.add)),
+                        IconButton(
+                          onPressed: widget.onTap,
+                          icon: Icon(Icons.add),
+                        ),
                       ],
                     ),
                   ],

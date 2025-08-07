@@ -67,13 +67,26 @@ class _MyRecommendedListState extends State<MyCategoryList> {
                       child: Image.asset(widget.imageAssets),
                     ),
                     SizedBox(height: 10),
-                    Text(widget.name),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(widget.price),
-                        IconButton(onPressed: () {}, icon: Icon(Icons.add)),
-                      ],
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            widget.name,
+                            style: Theme.of(context).textTheme.labelMedium,
+                          ),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                widget.price,
+                                style: Theme.of(context).textTheme.labelLarge,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
