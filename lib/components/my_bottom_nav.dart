@@ -32,13 +32,6 @@ class MyBottomNav extends StatelessWidget {
             gap: 4,
             textColor: Theme.of(context).colorScheme.secondary,
           ),
-          GButton(
-            icon: Icons.history,
-            text: 'Activity',
-            gap: 4,
-            textColor: Theme.of(context).colorScheme.secondary,
-            iconColor: Theme.of(context).colorScheme.secondary,
-          ),
         ],
       ),
     );
