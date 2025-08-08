@@ -56,6 +56,8 @@ class _ShopPageState extends State<ShopPage> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Consumer<Cart>(
       builder: (context, value, child) {
         List<SaladItem> currentList;
@@ -77,7 +79,9 @@ class _ShopPageState extends State<ShopPage> {
               child:
                   // Shop Page Main Display
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: screenWidth > 600
+                        ? CrossAxisAlignment.center
+                        : CrossAxisAlignment.start,
                     children: [
                       // Greeting Text
                       Padding(
@@ -141,123 +145,107 @@ class _ShopPageState extends State<ShopPage> {
                       // TODO: Create Category NAV:  Hottest, Popular, and New Combo
                       Center(
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            SegmentedButton(
-                              emptySelectionAllowed: true,
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                              ),
+                              child: SizedBox(
+                                width: double.infinity,
+                                child: SegmentedButton(
+                                  emptySelectionAllowed: true,
 
-                              segments: [
-                                // Hottest Category
-                                ButtonSegment(
-                                  value: 'Hottest',
-                                  label: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                            right: 3,
-                                          ),
-                                          child: Icon(Icons.whatshot),
-                                        ),
-                                      ),
-                                      Text(
+                                  segments: [
+                                    // Hottest Category
+                                    ButtonSegment(
+                                      value: 'Hottest',
+                                      label: Text(
                                         'Hottest',
                                         style: Theme.of(
                                           context,
                                         ).textTheme.labelSmall,
                                       ),
-                                    ],
-                                  ),
-                                ),
+                                    ),
 
-                                // Popular Category
-                                ButtonSegment(
-                                  value: 'Popular',
-                                  label: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                            right: 6,
-                                          ),
-                                          child: Icon(Icons.trending_up),
-                                        ),
-                                      ),
-                                      Text(
+                                    // Popular Category
+                                    ButtonSegment(
+                                      value: 'Popular',
+                                      label: Text(
                                         'Popular',
                                         style: Theme.of(
                                           context,
                                         ).textTheme.labelSmall,
                                       ),
-                                    ],
-                                  ),
-                                ),
+                                    ),
 
-                                // New Combo
-                                ButtonSegment(
-                                  value: 'New',
-                                  label: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                          right: 3,
-                                        ),
-                                        child: Icon(Icons.auto_awesome),
-                                      ),
-                                      Text(
+                                    // New Combo
+                                    ButtonSegment(
+                                      value: 'New',
+                                      label: Text(
                                         'New',
                                         style: Theme.of(
                                           context,
                                         ).textTheme.labelSmall,
                                       ),
-                                    ],
+                                    ),
+                                  ],
+
+                                  selected: <String>{_selectedValue},
+                                  onSelectionChanged:
+                                      (Set<String> newSelection) {
+                                        setState(() {
+                                          _selectedValue = newSelection.first;
+                                        });
+                                      },
+                                  showSelectedIcon: false,
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        WidgetStateProperty.resolveWith((
+                                          states,
+                                        ) {
+                                          if (states.contains(
+                                            WidgetState.selected,
+                                          )) {
+                                            return Theme.of(
+                                              context,
+                                            ).colorScheme.primary;
+                                          }
+                                          return Theme.of(
+                                            context,
+                                          ).colorScheme.tertiary;
+                                        }),
                                   ),
                                 ),
-                              ],
-                              selected: <String>{_selectedValue},
-                              onSelectionChanged: (Set<String> newSelection) {
-                                setState(() {
-                                  _selectedValue = newSelection.first;
-                                });
-                              },
-                              showSelectedIcon: false,
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    WidgetStateProperty.resolveWith((states) {
-                                      if (states.contains(
-                                        WidgetState.selected,
-                                      )) {
-                                        return Theme.of(
-                                          context,
-                                        ).colorScheme.primary;
-                                      }
-                                      return Theme.of(
-                                        context,
-                                      ).colorScheme.tertiary;
-                                    }),
                               ),
                             ),
 
                             //Category list
-                            SizedBox(
-                              height: 170,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) {
-                                  final ColorList color =
-                                      backgroundColorList[index %
-                                          backgroundColorList.length];
-                                  final SaladItem item = currentList[index];
-                                  return MyCategoryList(
-                                    name: item.name,
-                                    price: item.price,
-                                    imageAssets: item.imageAssets,
-                                    color: color.color,
-                                  );
-                                },
-                                itemCount: currentList.length,
+                            Align(
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 8,
+                                ),
+                                child: SizedBox(
+                                  height: 170,
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder: (context, index) {
+                                      final ColorList color =
+                                          backgroundColorList[index %
+                                              backgroundColorList.length];
+                                      final SaladItem item = currentList[index];
+                                      return MyCategoryList(
+                                        name: item.name,
+                                        price: item.price,
+                                        imageAssets: item.imageAssets,
+                                        color: color.color,
+                                      );
+                                    },
+                                    itemCount: currentList.length,
+                                  ),
+                                ),
                               ),
                             ),
                           ],

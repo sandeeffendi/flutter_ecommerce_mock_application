@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_submission_app/screens/mobile/pages/home_page.dart';
+import 'package:my_submission_app/screens/mobile/splash_screen.dart';
 import 'package:my_submission_app/theme/light_mode.dart';
 import 'package:provider/provider.dart%20';
 import 'model/cart.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: lightmode,
 
-        home: HomePage(),
+        home: MySplashScreen(),
       ),
     );
   }
