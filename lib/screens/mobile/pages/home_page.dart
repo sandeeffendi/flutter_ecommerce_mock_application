@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_submission_app/components/my_bottom_nav.dart';
-import 'package:my_submission_app/screens/mobile/pages/activity_page.dart';
 import 'package:my_submission_app/screens/mobile/pages/basket_page.dart';
 import 'package:my_submission_app/screens/mobile/pages/shop_page.dart';
 import 'package:my_submission_app/screens/mobile/splash_screen.dart';
