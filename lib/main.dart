@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_submission_app/screens/mobile/splash_screen.dart';
 import 'package:my_submission_app/theme/light_mode.dart';
-import 'package:provider/provider.dart%20';
+import 'package:provider/provider.dart';
 import 'model/cart.dart';
 
 void main() {

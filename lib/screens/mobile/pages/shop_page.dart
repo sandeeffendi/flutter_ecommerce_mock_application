@@ -4,7 +4,7 @@ import 'package:my_submission_app/components/my_recommended_list.dart';
 import 'package:my_submission_app/model/background_color_list.dart';
 import 'package:my_submission_app/model/salad_item.dart';
 import 'package:my_submission_app/services/shared_prefs_services.dart';
-import 'package:provider/provider.dart%20';
+import 'package:provider/provider.dart';
 import 'package:my_submission_app/model/cart.dart';
 
 class ShopPage extends StatefulWidget {
