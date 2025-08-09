@@ -67,61 +67,65 @@ class _HomePageState extends State<HomePage> {
       // Drawer
       drawer: Drawer(
         backgroundColor: Theme.of(context).colorScheme.tertiary,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              children: [
-                DrawerHeader(
-                  child: Image.asset('assets/images/welcome_screen_basket.png'),
-                ),
-                Padding(padding: EdgeInsets.all(25), child: Divider()),
-
-                // Pages
-                Padding(
-                  padding: EdgeInsets.all(25),
-                  child: ListTile(
-                    leading: Icon(Icons.person),
-                    title: Text('Profile'),
-                  ),
-                ),
-
-                Padding(
-                  padding: EdgeInsetsGeometry.all(25),
-                  child: ListTile(
-                    leading: Icon(Icons.info),
-                    title: Text(
-                      'About',
-                      style: Theme.of(context).textTheme.labelMedium,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  DrawerHeader(
+                    child: Image.asset(
+                      'assets/images/welcome_screen_basket.png',
                     ),
                   ),
-                ),
-              ],
-            ),
+                  Padding(padding: EdgeInsets.all(25), child: Divider()),
 
-            // TODO: Create dark mode, light mode toggle
+                  // Pages
+                  Padding(
+                    padding: EdgeInsets.all(25),
+                    child: ListTile(
+                      leading: Icon(Icons.person),
+                      title: Text('Profile'),
+                    ),
+                  ),
 
-            // Logout Button
-            Container(
-              alignment: Alignment.bottomRight,
-              child: RawMaterialButton(
-                onPressed: setLogout,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Log Out',
+                  Padding(
+                    padding: EdgeInsetsGeometry.all(25),
+                    child: ListTile(
+                      leading: Icon(Icons.info),
+                      title: Text(
+                        'About',
                         style: Theme.of(context).textTheme.labelMedium,
                       ),
                     ),
-                    Icon(Icons.logout),
-                  ],
-                ),
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 25),
+                    child: RawMaterialButton(
+                      onPressed: setLogout,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'Log Out',
+                              style: Theme.of(context).textTheme.labelMedium,
+                            ),
+                          ),
+                          Icon(Icons.logout),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
+
+              // TODO: Create dark mode, light mode toggle
+            ],
+          ),
         ),
       ),
 

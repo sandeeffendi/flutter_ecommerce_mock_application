@@ -111,6 +111,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
             children: [
               // Top container
               Container(
+                width: double.infinity,
                 color: Theme.of(context).colorScheme.primary,
                 padding: const EdgeInsets.only(
                   left: 37,
