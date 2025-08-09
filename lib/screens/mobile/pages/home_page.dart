@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_submission_app/components/my_bottom_nav.dart';
+import 'package:my_submission_app/screens/mobile/pages/about_pages.dart';
 import 'package:my_submission_app/screens/mobile/pages/basket_page.dart';
+import 'package:my_submission_app/screens/mobile/pages/profile_pages.dart';
 import 'package:my_submission_app/screens/mobile/pages/shop_page.dart';
 import 'package:my_submission_app/screens/mobile/splash_screen.dart';
 import 'package:my_submission_app/services/shared_prefs_services.dart';
@@ -85,18 +87,74 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: EdgeInsets.all(25),
                     child: ListTile(
-                      leading: Icon(Icons.person),
-                      title: Text('Profile'),
+                      title: TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProfilePages(),
+                            ),
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 10),
+                              child: Icon(
+                                Icons.person,
+                                size: 24,
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                            Text(
+                              'Profile',
+                              style: Theme.of(context).textTheme.labelLarge
+                                  ?.copyWith(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.secondary,
+                                  ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
 
                   Padding(
                     padding: EdgeInsetsGeometry.all(25),
                     child: ListTile(
-                      leading: Icon(Icons.info),
-                      title: Text(
-                        'About',
-                        style: Theme.of(context).textTheme.labelMedium,
+                      title: TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AboutPages(),
+                            ),
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 10),
+                              child: Icon(
+                                Icons.info,
+                                size: 25,
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                            Text(
+                              'About',
+                              style: Theme.of(context).textTheme.labelLarge
+                                  ?.copyWith(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.secondary,
+                                  ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

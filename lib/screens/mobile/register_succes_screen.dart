@@ -3,16 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:my_submission_app/screens/mobile/login_page.dart';
 
-class RegisterSuccesScreen extends StatefulWidget {
+class RegisterSuccesScreen extends StatelessWidget {
   final String? username;
 
   const RegisterSuccesScreen({super.key, required this.username});
 
-  @override
-  State<RegisterSuccesScreen> createState() => _RegisterSuccesState();
-}
-
-class _RegisterSuccesState extends State<RegisterSuccesScreen> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -47,7 +42,7 @@ class _RegisterSuccesState extends State<RegisterSuccesScreen> {
                             ),
                       ),
                       Text(
-                        'Welcome ${widget.username}',
+                        'Welcome $username',
                         style: Theme.of(context).textTheme.headlineLarge,
                         textAlign: TextAlign.center,
                       ),
