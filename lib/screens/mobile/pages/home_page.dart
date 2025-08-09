@@ -3,6 +3,7 @@ import 'package:my_submission_app/components/my_bottom_nav.dart';
 import 'package:my_submission_app/screens/mobile/pages/about_pages.dart';
 import 'package:my_submission_app/screens/mobile/pages/basket_page.dart';
 import 'package:my_submission_app/screens/mobile/pages/profile_pages.dart';
+import 'package:my_submission_app/screens/mobile/pages/setting_page.dart';
 import 'package:my_submission_app/screens/mobile/pages/shop_page.dart';
 import 'package:my_submission_app/screens/mobile/splash_screen.dart';
 import 'package:my_submission_app/services/shared_prefs_services.dart';
@@ -41,7 +42,8 @@ class _HomePageState extends State<HomePage> {
     // Basket Page
     BasketPage(),
 
-    // ActivityPage
+    // Setting Page
+    SettingPage(),
   ];
 
   // Set logout state
