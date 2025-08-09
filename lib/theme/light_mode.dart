@@ -14,7 +14,7 @@ ThemeData lightmode = ThemeData(
     error: Color(0xFFB00020),
     onError: Color(0xFFFFFFFF),
 
-    inversePrimary: Color(0xFFE0E0E0),
+    inversePrimary: Color.fromARGB(255, 224, 224, 224),
   ),
   textTheme: myTextTheme,
 
