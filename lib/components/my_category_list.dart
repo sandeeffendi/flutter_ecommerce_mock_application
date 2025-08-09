@@ -73,7 +73,10 @@ class _MyRecommendedListState extends State<MyCategoryList> {
                         children: [
                           Text(
                             widget.name,
-                            style: Theme.of(context).textTheme.labelMedium,
+                            style: Theme.of(context).textTheme.labelMedium
+                                ?.copyWith(
+                                  color: const Color.fromARGB(255, 0, 27, 49),
+                                ),
                           ),
                           Align(
                             alignment: Alignment.centerRight,
@@ -81,7 +84,15 @@ class _MyRecommendedListState extends State<MyCategoryList> {
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
                                 widget.price,
-                                style: Theme.of(context).textTheme.labelLarge,
+                                style: Theme.of(context).textTheme.labelLarge
+                                    ?.copyWith(
+                                      color: const Color.fromARGB(
+                                        255,
+                                        0,
+                                        27,
+                                        49,
+                                      ),
+                                    ),
                               ),
                             ),
                           ),

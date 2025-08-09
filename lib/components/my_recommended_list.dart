@@ -71,6 +71,7 @@ class _MyRecommendedListState extends State<MyRecommendedList> {
                       widget.name,
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         fontWeight: FontWeight.bold,
+                        color: const Color.fromARGB(255, 0, 27, 49),
                       ),
                     ),
                     Row(
@@ -79,7 +80,10 @@ class _MyRecommendedListState extends State<MyRecommendedList> {
                         Text(
                           widget.price,
                           style: Theme.of(context).textTheme.labelSmall
-                              ?.copyWith(fontWeight: FontWeight.bold),
+                              ?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: const Color.fromARGB(255, 0, 27, 49),
+                              ),
                         ),
                         IconButton(
                           onPressed: widget.onTap,
