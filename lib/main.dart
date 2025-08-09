@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:my_submission_app/screens/mobile/pages/home_page.dart';
-import 'package:my_submission_app/screens/mobile/pages/profile_pages.dart';
-import 'package:my_submission_app/screens/mobile/pages/setting_page.dart';
 import 'package:my_submission_app/screens/mobile/splash_screen.dart';
-import 'package:my_submission_app/theme/ThemeProvider.dart';
+import 'package:my_submission_app/theme/theme_provider.dart';
 import 'package:my_submission_app/theme/light_mode.dart';
 import 'package:my_submission_app/theme/dark_mode.dart';
 import 'package:provider/provider.dart';
 import 'model/cart.dart';
-import 'screens/mobile/splash_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

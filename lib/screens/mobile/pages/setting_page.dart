@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_submission_app/theme/ThemeProvider.dart';
+import 'package:my_submission_app/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class SettingPage extends StatelessWidget {
@@ -48,7 +48,7 @@ class SettingPage extends StatelessWidget {
                       Switch(
                         value: themeProvider.isLightMode,
                         onChanged: (value) {
-                          themeProvider.ToggleTheme();
+                          themeProvider.toggleTheme();
                         },
                       ),
                     ],

@@ -6,7 +6,7 @@ class Themeprovider extends ChangeNotifier {
   // Getter isLightMode value
   bool get isLightMode => _isLightMode;
 
-  void ToggleTheme() {
+  void toggleTheme() {
     _isLightMode = !_isLightMode;
     notifyListeners();
   }
