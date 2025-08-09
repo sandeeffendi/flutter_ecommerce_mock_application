@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:my_submission_app/screens/mobile/pages/home_page.dart';
 import 'package:my_submission_app/screens/mobile/pages/profile_pages.dart';
+import 'package:my_submission_app/screens/mobile/pages/setting_page.dart';
 import 'package:my_submission_app/screens/mobile/splash_screen.dart';
+import 'package:my_submission_app/theme/ThemeProvider.dart';
 import 'package:my_submission_app/theme/light_mode.dart';
+import 'package:my_submission_app/theme/dark_mode.dart';
 import 'package:provider/provider.dart';
 import 'model/cart.dart';
+import 'screens/mobile/splash_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => Cart()),
+        ChangeNotifierProvider(create: (_) => Themeprovider()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -16,14 +28,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => Cart(),
-      builder: (context, child) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: lightmode,
+    final themeProvider = Provider.of<Themeprovider>(context);
 
-        home: HomePage(),
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: themeProvider.isLightMode ? lightmode : darkmode,
+
+      home: MySplashScreen(),
     );
   }
 }
