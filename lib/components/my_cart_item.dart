@@ -3,18 +3,13 @@ import 'package:my_submission_app/model/salad_item.dart';
 import 'package:provider/provider.dart';
 import 'package:my_submission_app/model/cart.dart';
 
-class MyCartItem extends StatefulWidget {
+class MyCartItem extends StatelessWidget {
   final SaladItem salad;
 
   const MyCartItem({super.key, required this.salad});
 
-  @override
-  State<MyCartItem> createState() => _MyCartItemState();
-}
-
-class _MyCartItemState extends State<MyCartItem> {
   // Remove item from cart
-  void removeItemFromCart(SaladItem salad) {
+  void removeItemFromCart(BuildContext context, SaladItem salad) {
     Provider.of<Cart>(context, listen: false).removeUserCart(salad);
 
     // alert user item has been deleted
@@ -44,22 +39,22 @@ class _MyCartItemState extends State<MyCartItem> {
             ),
             margin: EdgeInsets.only(bottom: 8),
             child: ListTile(
-              leading: Image.asset(widget.salad.imageAssets),
+              leading: Image.asset(salad.imageAssets),
               title: Text(
-                widget.salad.name,
+                salad.name,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               subtitle: Container(
                 margin: EdgeInsets.only(top: 3),
                 child: Text(
-                  widget.salad.price,
+                  salad.price,
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
               ),
               trailing: IconButton(
                 icon: Icon(Icons.delete),
                 onPressed: () {
-                  removeItemFromCart(widget.salad);
+                  removeItemFromCart(context, salad);
                 },
               ),
             ),
