@@ -20,15 +20,26 @@ class MyBottomNav extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         onTabChange: (value) => onTabChange!(value),
         tabs: [
+          // Shop Button Navigation
           GButton(
             icon: Icons.home,
             text: 'Home',
             gap: 4,
             textColor: Theme.of(context).colorScheme.secondary,
           ),
+
+          // Basket Button Navigation
           GButton(
             icon: Icons.shopping_basket_outlined,
             text: 'My Basket',
+            gap: 4,
+            textColor: Theme.of(context).colorScheme.secondary,
+          ),
+
+          // Setting Page Navigation
+          GButton(
+            icon: Icons.settings,
+            text: 'Settings',
             gap: 4,
             textColor: Theme.of(context).colorScheme.secondary,
           ),
