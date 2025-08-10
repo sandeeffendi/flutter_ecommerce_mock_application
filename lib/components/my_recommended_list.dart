@@ -6,7 +6,7 @@ class MyRecommendedList extends StatefulWidget {
   final String imageAssets;
   final void Function()? onTap;
 
-  MyRecommendedList({
+  const MyRecommendedList({
     super.key,
     required this.name,
     required this.price,

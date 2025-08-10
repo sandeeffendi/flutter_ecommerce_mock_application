@@ -24,7 +24,7 @@ class _ProfilePagesState extends State<ProfilePages> {
 
   // Get username
   Future<void> getUsername() async {
-    final prefService = await SharedPrefsServices();
+    final prefService = SharedPrefsServices();
     final name = await prefService.getUsername();
     setState(() {
       username = name;

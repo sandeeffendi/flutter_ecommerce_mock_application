@@ -3,7 +3,7 @@ import 'package:my_submission_app/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class SettingPage extends StatelessWidget {
-  SettingPage({super.key});
+  const SettingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
