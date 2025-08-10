@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:my_submission_app/components/my_text_form_field.dart';
+import 'package:my_submission_app/screens/mobile/pages/home_page.dart';
 import 'package:my_submission_app/screens/mobile/register_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -32,6 +32,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
         SnackBar(
           content: Text('Email is not registered'),
           duration: Duration(seconds: 1),
+          backgroundColor: Colors.red,
         ),
       );
       return;
@@ -44,18 +45,22 @@ class _MyLoginPageState extends State<MyLoginPage> {
           duration: Duration(seconds: 1),
         ),
       );
+
       return;
     }
 
-    // Login Succes Navigate to HomePage
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Login succesfull'),
         duration: Duration(seconds: 1),
+        backgroundColor: Colors.green,
       ),
     );
-    return;
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => HomePage()),
+    );
   }
 
   // Email Password Validator
@@ -95,160 +100,148 @@ class _MyLoginPageState extends State<MyLoginPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       resizeToAvoidBottomInset: true,
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          final isKeyboardView = MediaQuery.of(context).viewInsets.bottom > 0;
-
-          final screenHeight = MediaQuery.of(context).size.height;
-          final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
-          final availableHeight = screenHeight - keyboardHeight;
-
-          final topHeight = availableHeight * 4 / 7;
-          final bottomHeight = availableHeight * 3 / 7;
-
-          return SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  color: Theme.of(context).colorScheme.primary,
-                  width: double.infinity,
-                  height: topHeight,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 37, right: 37, top: 155),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: isKeyboardView ? 50 : 260,
-                          child: Image.asset(
-                            'assets/images/welcome_screen_basket.png',
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        Image.asset(
-                          'assets/images/welcome_screen_basket_shadow.png',
-                        ),
-                      ],
-                    ),
-                  ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Top container
+              Container(
+                width: double.infinity,
+                color: Theme.of(context).colorScheme.primary,
+                padding: const EdgeInsets.only(
+                  left: 37,
+                  right: 37,
+                  top: 100,
+                  bottom: 20,
                 ),
-
-                // Form Display Container
-                SizedBox(
-                  height: bottomHeight,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      top: 8,
-                      bottom: 8,
-                      left: 24,
-                      right: 24,
-                    ),
-                    child: Column(
-                      children: [
-                        Text(
-                          'Login To Explore More',
-                          style: Theme.of(context).textTheme.bodyLarge,
+                child: Column(
+                  children: [
+                    Hero(
+                      tag: 'LoginRegisterIcon',
+                      child: SizedBox(
+                        height: MediaQuery.of(context).viewInsets.bottom > 0
+                            ? 150
+                            : 200,
+                        child: Image.asset(
+                          'assets/images/welcome_screen_basket.png',
                         ),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    SizedBox(
+                      width: MediaQuery.of(context).viewInsets.bottom > 0
+                          ? 150
+                          : 250,
+                      child: Image.asset(
+                        'assets/images/welcome_screen_basket_shadow.png',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
 
-                        // Login Form
-                        SizedBox(height: 8),
-                        Form(
-                          key: _keyForm,
-                          child: Column(
+              // Login form
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 16,
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      'Login To Explore More',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    const SizedBox(height: 8),
+
+                    Form(
+                      key: _keyForm,
+                      child: Column(
+                        children: [
+                          MyTextFormField(
+                            hintText: 'Email',
+                            validator: _validateEmail,
+                            controller: _emailController,
+                          ),
+                          const SizedBox(height: 8),
+                          MyTextFormField(
+                            hintText: 'Password',
+                            validator: _validatePassword,
+                            controller: _passwordController,
+                            obscure: true,
+                          ),
+                          const SizedBox(height: 8),
+
+                          // Login Button
+                          SizedBox(
+                            width: double.infinity,
+                            height: 56,
+                            child: RawMaterialButton(
+                              onPressed: _submitLoginForm,
+                              fillColor: Theme.of(context).colorScheme.primary,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Text(
+                                'Login',
+                                style: Theme.of(context).textTheme.labelLarge
+                                    ?.copyWith(color: Colors.white),
+                              ),
+                            ),
+                          ),
+
+                          const SizedBox(height: 8),
+
+                          // Create Account
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              //Email Input
-                              MyTextFormField(
-                                hintText: 'Email',
-                                validator: _validateEmail,
-                                controller: _emailController,
+                              Text(
+                                'Don\'t have an account?',
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.titleSmall?.copyWith(fontSize: 12),
                               ),
-
-                              SizedBox(height: 8),
-
-                              // Password Input
-                              MyTextFormField(
-                                hintText: 'Password',
-                                validator: _validatePassword,
-                                controller: _passwordController,
-                                obscure: true,
-                              ),
-
-                              SizedBox(height: 8),
-
-                              // Login Button
-                              SizedBox(
-                                width: double.infinity,
-                                height: 56,
-                                child: RawMaterialButton(
-                                  onPressed: _submitLoginForm,
-                                  fillColor: Theme.of(
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
                                     context,
-                                  ).colorScheme.primary,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  child: Text(
-                                    'Login',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .labelLarge
-                                        ?.copyWith(color: Colors.white),
-                                  ),
-                                ),
-                              ),
-
-                              // Dont have an account? Create an Account
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    'Don\'t have an account?',
-                                    style: GoogleFonts.montserrat(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.secondary,
+                                    MaterialPageRoute(
+                                      builder: (context) => MyRegisterPage(),
                                     ),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              MyRegisterPage(),
-                                        ),
-                                      );
-                                    },
-                                    child: Text(
-                                      'Create an account.',
-                                      style: GoogleFonts.montserrat(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w600,
+                                  );
+                                },
+                                child: Text(
+                                  'Create an account.',
+                                  style: Theme.of(context).textTheme.titleSmall
+                                      ?.copyWith(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
                                         color: const Color.fromARGB(
                                           255,
-                                          73,
-                                          32,
-                                          255,
+                                          36,
+                                          5,
+                                          174,
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
                             ],
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-          );
-        },
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -37,6 +37,9 @@ dependencies:
   cupertino_icons: ^1.0.8
   shared_preferences: ^2.5.3
   flutter_native_splash: ^2.4.6
+  lottie: ^3.3.1
+  google_nav_bar: ^5.0.7
+  provider: ^6.1.5
 
 
 dev_dependencies:
@@ -66,6 +69,13 @@ flutter:
     - assets/images/register_screen_basket.png
     - assets/images/welcome_screen_basket_shadow.png
     - assets/images/register_screen_basket_shadow.png
+    - assets/images/fresh_hub_logo.png
+    - assets/images/berry_manggo_combo.png
+    - assets/images/honey_lime_combo.png
+    - assets/images/melon_fruit_combo.png
+    - assets/images/quinoa_fruit_combo.png
+    - assets/images/tropical_fruit_combo.png
+    - assets/animation/success.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

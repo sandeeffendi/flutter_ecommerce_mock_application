@@ -1,0 +1,111 @@
+import 'package:flutter/material.dart';
+
+class MyCategoryList extends StatefulWidget {
+  final String name;
+  final String price;
+  final String imageAssets;
+  final Color color;
+
+  const MyCategoryList({
+    super.key,
+    required this.name,
+    required this.price,
+    required this.imageAssets,
+    required this.color,
+  });
+
+  @override
+  State<MyCategoryList> createState() => _MyRecommendedListState();
+}
+
+class _MyRecommendedListState extends State<MyCategoryList> {
+  bool isFavorite = false;
+
+  void setFavorite() {
+    setState(() {
+      isFavorite = !isFavorite;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setFavorite();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 170,
+      decoration: BoxDecoration(
+        color: widget.color,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      margin: EdgeInsets.all(2),
+      child: ClipRRect(
+        child: Stack(
+          children: [
+            IconButton(
+              onPressed: () {
+                setFavorite();
+              },
+              icon: Icon(
+                isFavorite ? Icons.favorite_outline : Icons.favorite,
+                color: Colors.red,
+              ),
+            ),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 12),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 60,
+                      width: 60,
+                      child: Image.asset(widget.imageAssets),
+                    ),
+                    SizedBox(height: 10),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            widget.name,
+                            style: Theme.of(context).textTheme.labelMedium
+                                ?.copyWith(
+                                  color: const Color.fromARGB(255, 0, 27, 49),
+                                ),
+                          ),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                widget.price,
+                                style: Theme.of(context).textTheme.labelLarge
+                                    ?.copyWith(
+                                      color: const Color.fromARGB(
+                                        255,
+                                        0,
+                                        27,
+                                        49,
+                                      ),
+                                    ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

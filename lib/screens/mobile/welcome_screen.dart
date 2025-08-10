@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_submission_app/screens/mobile/login_page.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -44,7 +45,6 @@ class WelcomeScreen extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-
                       // Form Description
                       Text(
                         'Get The Freshest Fruit Salad Combo',
@@ -67,7 +67,14 @@ class WelcomeScreen extends StatelessWidget {
                     width: double.infinity,
                     height: 56,
                     child: RawMaterialButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MyLoginPage(),
+                          ),
+                        );
+                      },
                       fillColor: Theme.of(context).colorScheme.primary,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5),
