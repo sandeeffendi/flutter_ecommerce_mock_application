@@ -89,7 +89,7 @@ This project demonstrates:
 ### Installation
 1. Clone the repository
 ```bash
-git clone [https://github.com/sandeeffendi/flutter_ecommerce_mock_application.git]
+git clone https://github.com/sandeeffendi/flutter_ecommerce_mock_application.git
 ```
 
 2. Navigate to project directory
